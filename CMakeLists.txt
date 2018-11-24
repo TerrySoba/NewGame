@@ -5,7 +5,7 @@ SET(SDL2PP_WITH_IMAGE ON) # if you need SDL_image support
 SET(SDL2PP_WITH_MIXER ON) # if you need SDL_mixer support
 SET(SDL2PP_WITH_TTF ON) # if you need SDL_ttf support
 
-set(SDL2_PATH "C:/SDL2")
+set(SDL2_PATH "C:\\SDL2\\SDL2-2.0.9\\")
 
 ADD_SUBDIRECTORY(3rdparty/libSDL2pp)
 
