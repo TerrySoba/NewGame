@@ -1,10 +1,8 @@
 #include <SDL2pp/SDL2pp.hh>
 
-
-
 int main(int argc, char **argv)
 {
-    std::string assetDir = "";
+    std::string assetDir = ".";
 
     if (argc >= 2)
     {
