@@ -25,3 +25,5 @@ install(
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
     ${SDL2PP_LIBRARIES}
 )
+
+include(vs2015.cmake)
