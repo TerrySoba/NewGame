@@ -1,7 +1,16 @@
 #include <SDL2pp/SDL2pp.hh>
 
+
+
 int main(int argc, char **argv)
 {
+    std::string assetDir = "";
+
+    if (argc >= 2)
+    {
+        assetDir = argv[1];
+    }
+
     try
     {
         using namespace SDL2pp;
@@ -22,7 +31,7 @@ int main(int argc, char **argv)
                         SDL_TEXTUREACCESS_STATIC, 16, 16);
         // Texture sprite2(renderer, "sprite.png"); // SDL_image support
 
-        Font font("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 40); // SDL_ttf font
+        Font font(assetDir + "/fonts/DejaVuSans.ttf", 40); // SDL_ttf font
 
         // Initialize audio mixer
         Mixer mixer(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
