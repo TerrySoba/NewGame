@@ -17,7 +17,7 @@ if (MSVC_VERSION)
     set(SDL2_MIXER_DLL_DIR C:/SDL2/SDL2_mixer-2.0.4/lib/x86)
 
     install(
-        FILES 
+        FILES
             ${SDL2_MIXER_DLL_DIR}/libFLAC-8.dll
             ${SDL2_MIXER_DLL_DIR}/libmodplug-1.dll
             ${SDL2_MIXER_DLL_DIR}/libmpg123-0.dll
@@ -30,5 +30,26 @@ if (MSVC_VERSION)
         DESTINATION bin 
     )
 
+    set(SDL2_TTF_DLL_DIR C:/SDL2/SDL2_ttf-2.0.14/lib/x86)
+    install(
+        FILES
+            ${SDL2_TTF_DLL_DIR}/libfreetype-6.dll
+            ${SDL2_TTF_DLL_DIR}/SDL2_ttf.dll
+            ${SDL2_TTF_DLL_DIR}/zlib1.dll
+        DESTINATION bin 
+    ) 
+
+    set(SDL2_IMAGE_DLL_DIR C:/SDL2/SDL2_image-2.0.4/lib/x86)
+    install(
+        FILES
+            ${SDL2_IMAGE_DLL_DIR}/libjpeg-9.dll
+            ${SDL2_IMAGE_DLL_DIR}/libpng16-16.dll
+            ${SDL2_IMAGE_DLL_DIR}/libtiff-5.dll
+            ${SDL2_IMAGE_DLL_DIR}/libwebp-7.dll
+            ${SDL2_IMAGE_DLL_DIR}/SDL2_image.dll
+            ${SDL2_IMAGE_DLL_DIR}/SDL2_image.lib
+            ${SDL2_IMAGE_DLL_DIR}/zlib1.dll
+        DESTINATION bin
+    )
 
 endif (MSVC_VERSION)
