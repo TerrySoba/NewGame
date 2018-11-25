@@ -42,8 +42,8 @@ pipeline {
                         checkout scm
                         echo 'Building..'
                         sh '''cmake -DCMAKE_BUILD_TYPE=Release . && \
-                            ninja && \
-                            ninja install
+                            make && \
+                            make install
                         '''
 
                     }
@@ -51,7 +51,7 @@ pipeline {
                 
             }
         }
-        
+
         stage('Smoke Test') {
             agent {
                 label 'windows'
