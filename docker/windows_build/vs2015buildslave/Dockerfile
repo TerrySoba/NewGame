@@ -14,8 +14,22 @@ WORKDIR C:\\SDL2
 RUN powershell -Command Invoke-WebRequest -Uri https://www.libsdl.org/release/SDL2-devel-2.0.9-VC.zip -OutFile SDL2-devel-2.0.9-VC.zip
 RUN cmake -E tar xzf SDL2-devel-2.0.9-VC.zip
 
+RUN powershell -Command Invoke-WebRequest -Uri https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-devel-2.0.14-VC.zip -OutFile SDL2_ttf-devel-2.0.14-VC.zip
+RUN cmake -E tar xzf SDL2_ttf-devel-2.0.14-VC.zip
+
+RUN powershell -Command Invoke-WebRequest -Uri https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-devel-2.0.4-VC.zip -OutFile SDL2_mixer-devel-2.0.4-VC.zip
+RUN cmake -E tar xzf SDL2_mixer-devel-2.0.4-VC.zip
+
+RUN powershell -Command Invoke-WebRequest -Uri https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.4-VC.zip -OutFile SDL2_image-devel-2.0.4-VC.zip
+RUN cmake -E tar xzf SDL2_image-devel-2.0.4-VC.zip
+
+
 WORKDIR C:\\ninja
 RUN powershell -Command Invoke-WebRequest -Uri https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-win.zip -OutFile ninja-win.zip
 RUN cmake -E tar xzf ninja-win.zip
 RUN setx path "C:\\ninja;%PATH%"
 
+WORKDIR C:\\git
+RUN powershell -Command Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.19.2.windows.1/MinGit-2.19.2-64-bit.zip -OutFile MinGit-2.19.2-64-bit.zip
+RUN cmake -E tar xzf MinGit-2.19.2-64-bit.zip
+RUN setx path "C:\\git\\cmd;%PATH%"
