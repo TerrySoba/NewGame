@@ -119,14 +119,19 @@ int main(int argc, char **argv)
         // Exception stores SDL_GetError() result and name of function which failed
         std::cerr << "Error in: " << e.GetSDLFunction() << std::endl;
         std::cerr << "  Reason: " << e.GetSDLError() << std::endl;
+        return 1;
     }
     catch (std::exception &e)
     {
         // This also works (e.g. "SDL_Init failed: No available video device")
         std::cerr << "Caught exception: \"" << e.what() << "\"" << std::endl;
+        return 1;
     }
     catch (...)
     {
         std::cerr << "Unknown exception caught." << std::endl;
+        return 1;
     }
+
+    return 0;
 }
