@@ -45,6 +45,31 @@ void GameLoop::exec()
                 case SDLK_ESCAPE:
                 case SDLK_q:
                     gameEnd = true;
+                    break;
+                case SDLK_LEFT:
+                    gamePad.left = true;
+                    break;
+                case SDLK_RIGHT:
+                    gamePad.right = true;
+                    break;
+                case SDLK_LCTRL:
+                    gamePad.fire = true;
+                    break;
+                }
+            }
+            else if (event.type == SDL_KEYUP)
+            {
+                switch (event.key.keysym.sym)
+                {
+                case SDLK_LEFT:
+                    gamePad.left = false;
+                    break;
+                case SDLK_RIGHT:
+                    gamePad.right = false;
+                    break;
+                case SDLK_LCTRL:
+                    gamePad.fire = false;
+                    break;
                 }
             }
         }

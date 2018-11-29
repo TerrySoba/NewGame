@@ -13,5 +13,6 @@ public:
 
 private:
     std::shared_ptr<SDL2pp::Texture> m_text;
-
+    int x = 0;
+    int y = 0;
 };
