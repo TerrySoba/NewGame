@@ -1,6 +1,9 @@
-#include <iostream>
+#include "gameloop.h"
+#include "titlescreen.h"
 
 #include <SDL2pp/SDL2pp.hh>
+
+#include <iostream>
 
 int main(int argc, char **argv)
 {
@@ -28,15 +31,31 @@ int main(int argc, char **argv)
 
         // Straightforward wrappers around corresponding SDL2 objects
         // These take full care of proper object destruction and error checking
-        Window window("libSDL2pp demo",
+        Window window("Game Window",
                       SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                       1920, 1080, SDL_WINDOW_RESIZABLE);
-        Renderer renderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+        
+        auto renderer = std::make_shared<Renderer>(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+        renderer->SetLogicalSize(426, 240).SetDrawColor(0, 16, 32).Clear();
+
+        auto titleScreen = std::make_shared<TitleScreen>();
+
+        GameLoop loop(renderer, titleScreen);
+
+        loop.setConfigValue("assetDir", assetDir);
+
+        loop.exec();
+
+#if 0
+
+
+
         Texture sprite1(renderer, SDL_PIXELFORMAT_ARGB8888,
                         SDL_TEXTUREACCESS_STATIC, 16, 16);
         // Texture sprite2(renderer, "sprite.png"); // SDL_image support
 
-        Font font(assetDir + "/fonts/DejaVuSans.ttf", 40); // SDL_ttf font
+        Font font(assetDir + "/fonts/DejaVuSans.ttf", 12); // SDL_ttf font
 
         // Initialize audio mixer
         Mixer mixer(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096);
@@ -44,8 +63,8 @@ int main(int argc, char **argv)
         // Chunk sound("effect.ogg"); // OGG sound file
 
         // Create texture from surface containing text rendered by SDL_ttf
-        Texture text(renderer, font.RenderUTF8_Blended(u8"Hello, world!",
-                                                     SDL_Color{255, 255, 255, 255}));
+        Texture text(renderer, font.RenderUTF8_Blended(u8"This is a real text. :)",
+                                                     SDL_Color{255, 255, 0, 255}));
 
         unsigned char pixels[16 * 16 * 4];
 
@@ -91,6 +110,9 @@ int main(int argc, char **argv)
 
             renderer.Present();
         }
+
+#endif
+
     }
     catch (SDL2pp::Exception &e)
     {
@@ -101,6 +123,10 @@ int main(int argc, char **argv)
     catch (std::exception &e)
     {
         // This also works (e.g. "SDL_Init failed: No available video device")
-        std::cerr << e.what() << std::endl;
+        std::cerr << "Caught exception: \"" << e.what() << "\"" << std::endl;
+    }
+    catch (...)
+    {
+        std::cerr << "Unknown exception caught." << std::endl;
     }
 }
