@@ -11,8 +11,9 @@ pipeline {
             agent {
                 // label 'vs2015buildslave'
                 dockerfile {
-                    filename 'Dockerfile'
-                    dir 'docker/windows_build/vs2015buildslave'
+                    image 'vs2015buildslave'
+                    // filename 'Dockerfile'
+                    // dir 'docker/windows_build/vs2015buildslave'
                 }
             }
 
