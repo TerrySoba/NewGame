@@ -1,21 +1,15 @@
 pipeline {
     agent none
 
-    /* options {
+    options {
         skipDefaultCheckout()
-    } */
+    }
 
     stages {
 	
         stage('Build Windows') {
             agent {
-                // label 'vs2015buildslave'
-                // dockerfile {
-                docker {
-                    image 'vs2015buildslave'
-                    // filename 'Dockerfile'
-                    // dir 'docker/windows_build/vs2015buildslave'
-                }
+                label 'vs2015buildslave'
             }
 
             steps {
