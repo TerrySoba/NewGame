@@ -1,9 +1,9 @@
 pipeline {
     agent none
 
-    options {
+    /* options {
         skipDefaultCheckout()
-    }
+    } */
 
     stages {
 	
