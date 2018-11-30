@@ -10,7 +10,8 @@ pipeline {
         stage('Build Windows') {
             agent {
                 // label 'vs2015buildslave'
-                dockerfile {
+                // dockerfile {
+                docker {
                     image 'vs2015buildslave'
                     // filename 'Dockerfile'
                     // dir 'docker/windows_build/vs2015buildslave'
