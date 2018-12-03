@@ -1,6 +1,8 @@
 # escape=`
 
-FROM mcr.microsoft.com/windows:1809
+# FROM mcr.microsoft.com/windows:1809
+# FROM mcr.microsoft.com/windows/servercore:1809
+FROM mcr.microsoft.com/windows/servercore:ltsc2016
 
 # Download collect.exe in case of an install failure.
 ADD https://aka.ms/vscollect.exe C:\TEMP\collect.exe
