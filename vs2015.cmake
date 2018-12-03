@@ -47,7 +47,6 @@ if (MSVC_VERSION)
             ${SDL2_IMAGE_DLL_DIR}/libtiff-5.dll
             ${SDL2_IMAGE_DLL_DIR}/libwebp-7.dll
             ${SDL2_IMAGE_DLL_DIR}/SDL2_image.dll
-            ${SDL2_IMAGE_DLL_DIR}/SDL2_image.lib
             ${SDL2_IMAGE_DLL_DIR}/zlib1.dll
         DESTINATION bin
     )
