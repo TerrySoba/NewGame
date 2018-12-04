@@ -21,63 +21,75 @@ void GameLoop::exec()
 
     GamePad gamePad;
 
+    uint32_t lastTicks = SDL_GetTicks();
+    uint32_t currentTicks = lastTicks;
+
     while (!gameEnd)
     {
         if (m_nextLevel)
         {
-            if (m_currentLevel) m_currentLevel->onExit(*this, *m_renderer);
+            if (m_currentLevel)
+                m_currentLevel->onExit(*this, *m_renderer);
             m_currentLevel = m_nextLevel;
             m_nextLevel.reset();
             m_currentLevel->onEnter(*this, *m_renderer);
+            lastTicks = SDL_GetTicks();
         }
 
-        SDL_Event event;
-        while (SDL_PollEvent(&event))
+        currentTicks = SDL_GetTicks();
+
+        while (lastTicks < currentTicks)
         {
-            if (event.type == SDL_QUIT)
+            lastTicks += 5; // 5ms corresponds to 200Hz
+
+            SDL_Event event;
+            while (SDL_PollEvent(&event))
             {
-                gameEnd = true;
-            }
-            else if (event.type == SDL_KEYDOWN)
-            {
-                switch (event.key.keysym.sym)
+                if (event.type == SDL_QUIT)
                 {
-                case SDLK_ESCAPE:
-                case SDLK_q:
                     gameEnd = true;
-                    break;
-                case SDLK_LEFT:
-                    gamePad.left = true;
-                    break;
-                case SDLK_RIGHT:
-                    gamePad.right = true;
-                    break;
-                case SDLK_LCTRL:
-                    gamePad.fire = true;
-                    break;
                 }
-            }
-            else if (event.type == SDL_KEYUP)
-            {
-                switch (event.key.keysym.sym)
+                else if (event.type == SDL_KEYDOWN)
                 {
-                case SDLK_LEFT:
-                    gamePad.left = false;
-                    break;
-                case SDLK_RIGHT:
-                    gamePad.right = false;
-                    break;
-                case SDLK_LCTRL:
-                    gamePad.fire = false;
-                    break;
+                    switch (event.key.keysym.sym)
+                    {
+                    case SDLK_ESCAPE:
+                    case SDLK_q:
+                        gameEnd = true;
+                        break;
+                    case SDLK_LEFT:
+                        gamePad.left = true;
+                        break;
+                    case SDLK_RIGHT:
+                        gamePad.right = true;
+                        break;
+                    case SDLK_LCTRL:
+                        gamePad.fire = true;
+                        break;
+                    }
+                }
+                else if (event.type == SDL_KEYUP)
+                {
+                    switch (event.key.keysym.sym)
+                    {
+                    case SDLK_LEFT:
+                        gamePad.left = false;
+                        break;
+                    case SDLK_RIGHT:
+                        gamePad.right = false;
+                        break;
+                    case SDLK_LCTRL:
+                        gamePad.fire = false;
+                        break;
+                    }
                 }
             }
+
+            m_currentLevel->doAction(*this, gamePad, lastTicks);
         }
 
         m_renderer->Clear();
-
-        m_currentLevel->doAction(*this, *m_renderer, gamePad, SDL_GetTicks());
-
+        m_currentLevel->draw(*m_renderer, SDL_GetTicks());
         m_renderer->Present();
     }
 }
