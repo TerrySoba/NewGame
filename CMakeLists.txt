@@ -14,7 +14,8 @@ INCLUDE_DIRECTORIES(${SDL2PP_INCLUDE_DIRS})
 ADD_EXECUTABLE(${PROJECT_NAME}
     src/main.cpp
     src/gameloop.cpp
-    src/titlescreen.cpp)
+    src/titlescreen.cpp
+    src/level1.cpp)
 
 INSTALL(
     TARGETS ${PROJECT_NAME}

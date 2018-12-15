@@ -1,5 +1,7 @@
 #include "titlescreen.h"
 
+#include "level1.h"
+
 #include <cmath>
 
 void TitleScreen::onEnter(GameLoopControl& gameLoopControl, SDL2pp::Renderer& renderer)
@@ -25,8 +27,10 @@ void TitleScreen::onExit(GameLoopControl& gameLoopControl, SDL2pp::Renderer& ren
 
 void TitleScreen::doAction(GameLoopControl& gameLoopControl, GamePad& gamePad, uint64_t timeMs)
 {
-    // if (gamePad.right) x += 1;
-    // if (gamePad.left) x -= 1;
+    if (gamePad.fire)
+    {
+        gameLoopControl.switchToLevel(std::make_shared<Level1>());
+    }
 }
 
 void TitleScreen::draw(SDL2pp::Renderer& renderer, uint64_t timeMs)

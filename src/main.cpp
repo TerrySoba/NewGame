@@ -1,5 +1,6 @@
 #include "gameloop.h"
 #include "titlescreen.h"
+#include "globals.h"
 
 #include <SDL2pp/SDL2pp.hh>
 
@@ -37,7 +38,7 @@ int main(int argc, char **argv)
         
         auto renderer = std::make_shared<Renderer>(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-        renderer->SetLogicalSize(426, 240).SetDrawColor(0, 16, 32).Clear();
+        renderer->SetLogicalSize(SCREEN_WIDTH, SCREEN_HEIGHT).SetDrawColor(0, 16, 32).Clear();
 
         auto titleScreen = std::make_shared<TitleScreen>();
 
