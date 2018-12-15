@@ -13,7 +13,6 @@ public:
     virtual void draw(SDL2pp::Renderer& renderer, uint64_t timeMs) override;
 
 private:
-    std::shared_ptr<SDL2pp::Texture> m_text;
-    int x = 0;
-    int y = 0;
+    std::shared_ptr<SDL2pp::Texture> m_gameTitleText;
+    std::shared_ptr<SDL2pp::Texture> m_pressStartText;
 };
