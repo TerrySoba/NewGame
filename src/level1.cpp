@@ -12,13 +12,24 @@ void Level1::onEnter(GameLoopControl& gameLoopControl, SDL2pp::Renderer& rendere
                                                      SDL_Color{255, 255, 0, 255}));
 
 
-    m_ship.texture = std::make_shared<SDL2pp::Texture>(renderer, gameLoopControl.getConfigValue("assetDir") + "/gfx/rgb.png");
+    m_ship.texture = std::make_shared<SDL2pp::Texture>(renderer, gameLoopControl.getConfigValue("assetDir") + "/gfx/ship.png");
     m_ship.pos = {100,220};
+
+
+    auto bulletTexture = std::make_shared<SDL2pp::Texture>(renderer, gameLoopControl.getConfigValue("assetDir") + "/gfx/bullet.png");
+    Actor bullet = {bulletTexture, {-100,-100}};
+
+    // add some idle bullets
+    for (int i = 0; i < 3; ++i)
+    {
+        m_idleBullets.push_back(bullet);
+    }
+
 }
 
 void Level1::onExit(GameLoopControl& gameLoopControl, SDL2pp::Renderer& renderer)
 {
-
+    
 }
 
 void Level1::doAction(GameLoopControl& gameLoopControl, GamePad& gamePad, uint64_t timeMs)

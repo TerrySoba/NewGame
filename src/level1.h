@@ -4,7 +4,7 @@
 
 #include <SDL2pp/SDL2pp.hh>
 
-#include <vector>
+#include <list>
 
 struct Actor
 {
@@ -22,6 +22,9 @@ public:
 
 private:
     std::shared_ptr<SDL2pp::Texture> m_levelHintText;
+
+    std::list<Actor> m_idleBullets;
+    std::list<Actor> m_activeBullets;
 
     Actor m_ship;
 };
