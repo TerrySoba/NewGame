@@ -25,8 +25,13 @@ install(
     DIRECTORY ${CMAKE_SOURCE_DIR}/fonts
     DESTINATION bin)
 
+install(
+    DIRECTORY ${CMAKE_SOURCE_DIR}/gfx
+    DESTINATION bin)
+
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
     ${SDL2PP_LIBRARIES}
 )
 
+include(mingw64.cmake)
 include(vs2015.cmake)
