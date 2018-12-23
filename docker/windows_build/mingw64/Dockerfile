@@ -16,12 +16,6 @@ RUN mkdir C:\\cmake && \
     7z.exe x cmake-3.13.1-win64-x64.zip && \
     setx /M  path "C:\\cmake\\cmake-3.13.1-win64-x64\\bin;%PATH%"
 
-RUN mkdir C:\\java && \
-    cd C:\\java && \
-	wget --no-check-certificate https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_windows-x64_bin.tar.gz && \
-    cmake -E tar xzf openjdk-10.0.2_windows-x64_bin.tar.gz && \
-    setx /M  path "C:\\java\\jdk-10.0.2\\bin;%PATH%"
-
 RUN mkdir C:\\ninja && \
     cd C:\\ninja && \
     wget --no-check-certificate https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-win.zip && \
@@ -49,23 +43,18 @@ RUN cd C:\\ && \
 	wget --no-check-certificate https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-win32/seh/x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z
 	
 RUN cd C:\\ && \
-    7z.exe x x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z && \
-	dir
+    7z.exe x x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z
 	
-#RUN cd C:\\ && \
-#    wget --no-check-certificate http://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20181211.tar.xz
+RUN mkdir C:\\java && \
+	cd C:\\java && \
+	wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/otn-pub/java/jdk/8u192-b12/750e1c8617c5452694857ad95c3ee230/server-jre-8u192-windows-x64.tar.gz && \
+	cmake -E tar xzf server-jre-8u192-windows-x64.tar.gz
 
+# FROM mcr.microsoft.com/windows/nanoserver:1809
+# FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/servercore:1809
 
-#RUN cd C:\\ && \
-#    7z.exe x msys2-base-x86_64-20181211.tar.xz && \
-#	7z.exe x msys2-base-x86_64-20181211.tar && \
-#    dir && \
-#	C:\\msys64\\msys2_shell.cmd
-	
-
-	
-FROM mcr.microsoft.com/windows/nanoserver:1809
-USER Administrator
+# USER Administrator
 COPY --from=builder C:\\git C:\\git
 RUN setx /M  path "C:\\git\\cmd;%PATH%"
 
@@ -73,7 +62,8 @@ COPY --from=builder C:\\cmake C:\\cmake
 RUN setx /M  path "C:\\cmake\\cmake-3.13.1-win64-x64\\bin;%PATH%"
 
 COPY --from=builder C:\\java C:\\java
-RUN setx /M  path "C:\\java\\jdk-10.0.2\\bin;%PATH%"
+# ADD server-jre-8u192-windows-x64.tar.gz C:\\java
+RUN setx /M  path "C:\\java\\jdk1.8.0_192\\\bin;%PATH%"
 
 COPY --from=builder C:\\ninja C:\\ninja
 RUN setx /M  path "C:\\ninja;%PATH%"
