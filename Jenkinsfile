@@ -16,7 +16,7 @@ pipeline {
                 checkout scm
                 echo 'Building..'
                 bat '''cmake -DCMAKE_LIBRARY_ARCHITECTURE=x64 \
-                        -DCMAKE_PREFIX_PATH=C:/SDL2/SDL2-2.0.9;C:/SDL2/SDL2_image-2.0.4;C:/SDL2/SDL2_mixer-2.0.4;C:/SDL2/SDL2_ttf-2.0.14 \
+                        -DCMAKE_PREFIX_PATH=C:/SDL2/SDL2-2.0.9/x86_64-w64-mingw32;C:/SDL2/SDL2_image-2.0.4/x86_64-w64-mingw32;C:/SDL2/SDL2_mixer-2.0.4/x86_64-w64-mingw32;C:/SDL2/SDL2_ttf-2.0.14/x86_64-w64-mingw32 \
                         -GNinja -DCMAKE_BUILD_TYPE=Release . && \
                     ninja && \
                     ninja install
