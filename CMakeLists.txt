@@ -23,6 +23,9 @@ INSTALL(
 
 install(
     DIRECTORY ${CMAKE_SOURCE_DIR}/fonts
+    DESTINATION bin)
+
+install(
     DIRECTORY ${CMAKE_SOURCE_DIR}/gfx
     DESTINATION bin)
 
