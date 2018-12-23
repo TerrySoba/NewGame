@@ -1,0 +1,1 @@
+docker build -t yoshi252/mingw64 .

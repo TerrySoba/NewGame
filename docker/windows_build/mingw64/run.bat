@@ -1,0 +1,1 @@
+docker run -it yoshi252/mingw64
