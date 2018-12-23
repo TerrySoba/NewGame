@@ -33,4 +33,5 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
     ${SDL2PP_LIBRARIES}
 )
 
+include(mingw64.cmake)
 include(vs2015.cmake)
