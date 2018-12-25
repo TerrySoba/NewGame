@@ -1,4 +1,3 @@
-# FROM mcr.microsoft.com/windows/nanoserver:1809
 FROM mcr.microsoft.com/windows/servercore:ltsc2019 as builder
 
 WORKDIR C:\\wget
@@ -19,14 +18,12 @@ RUN mkdir C:\\cmake && \
 RUN mkdir C:\\ninja && \
     cd C:\\ninja && \
     wget --no-check-certificate https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-win.zip && \
-    cmake -E tar xzf ninja-win.zip && \
-	setx /M  path "C:\\ninja;%PATH%"
+    cmake -E tar xzf ninja-win.zip
 
 RUN mkdir C:\\git && \
     cd C:\\git && \
 	wget --no-check-certificate https://github.com/git-for-windows/git/releases/download/v2.19.2.windows.1/MinGit-2.19.2-64-bit.zip && \
-	cmake -E tar xzf MinGit-2.19.2-64-bit.zip && \
-	setx /M  path "C:\\git\\cmd;%PATH%"
+	cmake -E tar xzf MinGit-2.19.2-64-bit.zip
 
 RUN mkdir C:\\SDL2 && \
 	cd C:\\SDL2 && \
@@ -50,25 +47,13 @@ RUN mkdir C:\\java && \
 	wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/otn-pub/java/jdk/8u192-b12/750e1c8617c5452694857ad95c3ee230/server-jre-8u192-windows-x64.tar.gz && \
 	cmake -E tar xzf server-jre-8u192-windows-x64.tar.gz
 
-# FROM mcr.microsoft.com/windows/nanoserver:1809
-# FROM mcr.microsoft.com/windows/servercore:ltsc2019
-FROM mcr.microsoft.com/windows/servercore:1809
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
-# USER Administrator
 COPY --from=builder C:\\git C:\\git
-RUN setx /M  path "C:\\git\\cmd;%PATH%"
-
 COPY --from=builder C:\\cmake C:\\cmake
-RUN setx /M  path "C:\\cmake\\cmake-3.13.1-win64-x64\\bin;%PATH%"
-
 COPY --from=builder C:\\java C:\\java
-# ADD server-jre-8u192-windows-x64.tar.gz C:\\java
-RUN setx /M  path "C:\\java\\jdk1.8.0_192\\\bin;%PATH%"
-
 COPY --from=builder C:\\ninja C:\\ninja
-RUN setx /M  path "C:\\ninja;%PATH%"
-
 COPY --from=builder C:\\SDL2 C:\\SDL2
-
 COPY --from=builder C:\\mingw64 C:\\mingw64
-RUN setx /M  path "C:\\mingw64\bin;%PATH%"
+
+RUN setx /M  path "C:\\git\\cmd;C:\\cmake\\cmake-3.13.1-win64-x64\\bin;C:\\java\\jdk1.8.0_192\\bin;C:\\ninja;C:\\mingw64\\bin;%PATH%"
