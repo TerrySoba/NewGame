@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include "logging.h"
+
 int main(int argc, char **argv)
 {
     std::string assetDir = ".";
@@ -48,22 +50,21 @@ int main(int argc, char **argv)
 
         loop.exec();
     }
-    catch (SDL2pp::Exception &e)
+    catch (SDL2pp::Exception& e)
     {
         // Exception stores SDL_GetError() result and name of function which failed
-        std::cerr << "Error in: " << e.GetSDLFunction() << std::endl;
-        std::cerr << "  Reason: " << e.GetSDLError() << std::endl;
+        LOG_ERROR("Error in: " << e.GetSDLFunction());
+        LOG_ERROR("  Reason: " << e.GetSDLError());
         return 1;
     }
-    catch (std::exception &e)
+    catch (std::exception& e)
     {
-        // This also works (e.g. "SDL_Init failed: No available video device")
-        std::cerr << "Caught exception: \"" << e.what() << "\"" << std::endl;
+        LOG_ERROR("Caught exception: \"" << e.what() << "\"");
         return 1;
     }
     catch (...)
     {
-        std::cerr << "Unknown exception caught." << std::endl;
+        LOG_ERROR("Unknown exception caught.");
         return 1;
     }
 

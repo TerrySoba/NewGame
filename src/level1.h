@@ -6,10 +6,21 @@
 
 #include <list>
 
+#include "logging.h"
+
 struct Actor
 {
     std::shared_ptr<SDL2pp::Texture> texture;
     SDL2pp::Point pos;
+
+    SDL2pp::Rect getBoundingBox()
+    {
+        if (!texture)
+        {
+            THROW_EXCEPTION("No texture is set, so no bounding box can be calculated.");
+        }
+    }
+
 };
 
 class Level1 : public Level
