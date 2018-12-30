@@ -1,27 +1,12 @@
 #pragma once
 
 #include "level.h"
+#include "logging.h"
+#include "simple_actor.h"
 
 #include <SDL2pp/SDL2pp.hh>
 
 #include <list>
-
-#include "logging.h"
-
-struct Actor
-{
-    std::shared_ptr<SDL2pp::Texture> texture;
-    SDL2pp::Point pos;
-
-    SDL2pp::Rect getBoundingBox()
-    {
-        if (!texture)
-        {
-            THROW_EXCEPTION("No texture is set, so no bounding box can be calculated.");
-        }
-    }
-
-};
 
 class Level1 : public Level
 {
@@ -34,8 +19,8 @@ public:
 private:
     std::shared_ptr<SDL2pp::Texture> m_levelHintText;
 
-    std::list<Actor> m_idleBullets;
-    std::list<Actor> m_activeBullets;
+    std::list<ActorPtr> m_idleBullets;
+    std::list<ActorPtr> m_activeBullets;
 
-    Actor m_ship;
+    std::shared_ptr<SimpleActor> m_ship;
 };

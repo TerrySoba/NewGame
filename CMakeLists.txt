@@ -15,7 +15,8 @@ ADD_EXECUTABLE(${PROJECT_NAME}
     src/main.cpp
     src/gameloop.cpp
     src/titlescreen.cpp
-    src/level1.cpp)
+    src/level1.cpp
+    src/simple_actor.cpp)
 
 INSTALL(
     TARGETS ${PROJECT_NAME}

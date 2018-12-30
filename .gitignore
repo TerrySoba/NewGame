@@ -1,2 +1,8 @@
 build/
 music/
+CMakeFiles/
+ninja.build
+*.ninja*
+NewGame
+CMakeCache.txt
+cmake_install.cmake
