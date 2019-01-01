@@ -9,14 +9,21 @@ SET(SDL2PP_WITH_TTF ON) # if you need SDL_ttf support
 
 ADD_SUBDIRECTORY(3rdparty/libSDL2pp)
 
-INCLUDE_DIRECTORIES(${SDL2PP_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(
+    ${SDL2PP_INCLUDE_DIRS}
+    3rdparty/catch2)
 
 ADD_EXECUTABLE(${PROJECT_NAME}
     src/main.cpp
     src/gameloop.cpp
     src/titlescreen.cpp
     src/level1.cpp
-    src/simple_actor.cpp)
+    src/simple_actor.cpp
+    src/actor_arena.cpp
+    src/new_game.cpp)
+
+ADD_EXECUTABLE(${PROJECT_NAME}_test
+    tests/test_main.cpp)
 
 INSTALL(
     TARGETS ${PROJECT_NAME}

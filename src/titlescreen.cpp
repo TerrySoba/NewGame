@@ -25,7 +25,7 @@ void TitleScreen::onExit(GameLoopControl& gameLoopControl, SDL2pp::Renderer& ren
 
 }
 
-void TitleScreen::doAction(GameLoopControl& gameLoopControl, GamePad& gamePad, uint64_t timeMs)
+void TitleScreen::doAction(GameLoopControl& gameLoopControl, const GamePad& gamePad, uint64_t timeMs)
 {
     if (gamePad.fire)
     {

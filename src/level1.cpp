@@ -29,7 +29,7 @@ void Level1::onExit(GameLoopControl& gameLoopControl, SDL2pp::Renderer& renderer
     
 }
 
-void Level1::doAction(GameLoopControl& gameLoopControl, GamePad& gamePad, uint64_t timeMs)
+void Level1::doAction(GameLoopControl& gameLoopControl, const GamePad& gamePad, uint64_t timeMs)
 {
     auto newShipPos = m_ship->getPos();
 
@@ -73,5 +73,10 @@ void Level1::draw(SDL2pp::Renderer& renderer, uint64_t timeMs)
     if (m_ship)
     {
         drawActor(renderer, *m_ship);
+    }
+
+    for (auto activeBullet : m_activeBullets)
+    {
+        drawActor(renderer, *activeBullet);
     }
 }
