@@ -16,9 +16,9 @@ struct Actor
     virtual SDL2pp::Rect getBoundingBox() const = 0;
 
     // This method is called periodically, 200 times per second.
-    virtual void doAction(const GamePad& gamePad, uint64_t timeMs) {}
+    virtual void doAction(const GamePad& /*gamePad*/, uint64_t /*timeMs*/) {}
 
     // This method will be called if the bounding box of this actor collides
     // with the bounding box of another actor.
-    virtual void collision(ActorPtr otherActor) {}
+    virtual void collision(ActorPtr /*otherActor*/) {}
 };

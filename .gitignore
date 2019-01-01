@@ -6,3 +6,8 @@ ninja.build
 NewGame
 CMakeCache.txt
 cmake_install.cmake
+NewGame_test
+*.a
+*.o
+*.exe
+*.lib

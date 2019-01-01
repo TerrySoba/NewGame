@@ -41,7 +41,12 @@
         "cstring": "cpp",
         "ctime": "cpp",
         "list": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "numeric": "cpp",
+        "ratio": "cpp",
+        "variant": "cpp"
     },
     "cmake.configureOnOpen": false
 }

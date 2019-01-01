@@ -24,12 +24,12 @@ void Level1::onEnter(GameLoopControl& gameLoopControl, SDL2pp::Renderer& rendere
 
 }
 
-void Level1::onExit(GameLoopControl& gameLoopControl, SDL2pp::Renderer& renderer)
+void Level1::onExit(GameLoopControl& /*gameLoopControl*/, SDL2pp::Renderer& /*renderer*/)
 {
     
 }
 
-void Level1::doAction(GameLoopControl& gameLoopControl, const GamePad& gamePad, uint64_t timeMs)
+void Level1::doAction(GameLoopControl& /*gameLoopControl*/, const GamePad& gamePad, uint64_t /*timeMs*/)
 {
     auto newShipPos = m_ship->getPos();
 
@@ -65,7 +65,7 @@ void drawActor(SDL2pp::Renderer& renderer, Actor& actor)
 }
 
 
-void Level1::draw(SDL2pp::Renderer& renderer, uint64_t timeMs)
+void Level1::draw(SDL2pp::Renderer& renderer, uint64_t /*timeMs*/)
 {
     // renderer.Copy(*m_levelHintText, SDL2pp::NullOpt, SDL2pp::Rect(SDL2pp::Point(100, 0) , m_levelHintText->GetSize()));
     drawCenteredH(renderer, *m_levelHintText, 0);

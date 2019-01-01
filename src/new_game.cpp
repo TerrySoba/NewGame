@@ -57,4 +57,6 @@ int runNewGame(const std::string& assetDir)
         LOG_ERROR("Unknown exception caught.");
         return 1;
     }
+
+    return 0;
 }

@@ -13,7 +13,7 @@ void ActorArena::addActor(ActorPtr actor)
     m_actors.push_back(actor);
 }
 
-void ActorArena::doAction(GameLoopControl& gameLoopControl, const GamePad& gamePad, uint64_t timeMs)
+void ActorArena::doAction(GameLoopControl& /*gameLoopControl*/, const GamePad& gamePad, uint64_t timeMs)
 {
     for (auto& actor : m_actors)
     {
