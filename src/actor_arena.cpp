@@ -1,5 +1,6 @@
 #include "actor_arena.h"
 
+#include "collision.h"
 
 #include <set>
 
@@ -21,5 +22,10 @@ void ActorArena::doAction(GameLoopControl& /*gameLoopControl*/, const GamePad& g
     }
 
     // now check for collisions
-    // todo
+    auto collisions = actorCollisions(m_actors);
+
+    for (auto& collision : collisions)
+    {
+        collision.first->collision(collision.second);
+    }
 }

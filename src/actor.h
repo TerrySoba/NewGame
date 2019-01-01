@@ -5,6 +5,7 @@
 #include <SDL2pp/SDL2pp.hh>
 
 #include <memory>
+#include <set>
 
 struct Actor;
 typedef std::shared_ptr<Actor> ActorPtr;
@@ -20,5 +21,5 @@ struct Actor
 
     // This method will be called if the bounding box of this actor collides
     // with the bounding box of another actor.
-    virtual void collision(ActorPtr /*otherActor*/) {}
+    virtual void collision(std::set<ActorPtr> /*otherActors*/) {}
 };

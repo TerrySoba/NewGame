@@ -14,14 +14,17 @@ void Level1::onEnter(GameLoopControl& gameLoopControl, SDL2pp::Renderer& rendere
     auto shipTexture = std::make_shared<SDL2pp::Texture>(renderer, gameLoopControl.getConfigValue("assetDir") + "/gfx/ship.png");
     m_ship = std::make_shared<SimpleActor>(shipTexture, SDL2pp::Point{100,220});
 
+    m_arena.addActor(m_ship);
+
     auto bulletTexture = std::make_shared<SDL2pp::Texture>(renderer, gameLoopControl.getConfigValue("assetDir") + "/gfx/bullet.png");
 
     // add some idle bullets
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 10; ++i)
     {
-        m_idleBullets.push_back(std::make_shared<SimpleActor>(bulletTexture, SDL2pp::Point{-100,-100}));
+        auto bullet = std::make_shared<BulletActor>(bulletTexture, SDL2pp::Point{-100,-100});
+        m_arena.addActor(bullet);
+        m_bullets.push_back(bullet);
     }
-
 }
 
 void Level1::onExit(GameLoopControl& /*gameLoopControl*/, SDL2pp::Renderer& /*renderer*/)
@@ -29,7 +32,20 @@ void Level1::onExit(GameLoopControl& /*gameLoopControl*/, SDL2pp::Renderer& /*re
     
 }
 
-void Level1::doAction(GameLoopControl& /*gameLoopControl*/, const GamePad& gamePad, uint64_t /*timeMs*/)
+std::shared_ptr<BulletActor> Level1::getInactiveBullet()
+{
+    for (auto bullet : m_bullets)
+    {
+        if (!bullet->isActive())
+        {
+            return bullet;
+        }
+    }
+
+    return nullptr;
+}
+
+void Level1::doAction(GameLoopControl& gameLoopControl, const GamePad& gamePad, uint64_t timeMs)
 {
     auto newShipPos = m_ship->getPos();
 
@@ -50,6 +66,19 @@ void Level1::doAction(GameLoopControl& /*gameLoopControl*/, const GamePad& gameP
     if (newShipPos.GetX() > maxX) newShipPos.SetX(maxX);
 
     m_ship->setPos(newShipPos);
+
+    if (gamePad.fire && timeMs >= m_nextBulletTime)
+    {
+        auto bullet = getInactiveBullet();
+        if (bullet)
+        {
+            bullet->setPos(SDL2pp::Point(newShipPos.GetX(), 200));
+            bullet->setActive(true);
+            m_nextBulletTime = timeMs + 200;
+        }
+    }
+
+    m_arena.doAction(gameLoopControl, gamePad, timeMs);
 }
 
 void drawCenteredH(SDL2pp::Renderer& renderer, SDL2pp::Texture& texture, int y)
@@ -75,8 +104,11 @@ void Level1::draw(SDL2pp::Renderer& renderer, uint64_t /*timeMs*/)
         drawActor(renderer, *m_ship);
     }
 
-    for (auto activeBullet : m_activeBullets)
+    for (auto bullet : m_bullets)
     {
-        drawActor(renderer, *activeBullet);
+        if (bullet->isActive())
+        {
+            drawActor(renderer, *bullet);
+        }
     }
 }

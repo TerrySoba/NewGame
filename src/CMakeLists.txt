@@ -5,7 +5,8 @@ add_library(NewGameLib STATIC
     level1.cpp
     simple_actor.cpp
     actor_arena.cpp
-    new_game.cpp)
+    new_game.cpp
+    bullet_actor.cpp)
 
 target_include_directories(NewGameLib PRIVATE
     ${SDL2PP_INCLUDE_DIRS}
