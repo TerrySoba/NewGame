@@ -72,7 +72,11 @@ void Level1::doAction(GameLoopControl& gameLoopControl, const GamePad& gamePad, 
         auto bullet = getInactiveBullet();
         if (bullet)
         {
-            bullet->setPos(SDL2pp::Point(newShipPos.GetX(), 200));
+            auto shipBound = m_ship->getBoundingBox();
+            auto bulletBound = bullet->getBoundingBox();
+            auto bulletPos = newShipPos + SDL2pp::Point{shipBound.GetW() / 2 - bulletBound.GetW() / 2, -bulletBound.GetH()};
+
+            bullet->setPos(bulletPos);
             bullet->setActive(true);
             m_nextBulletTime = timeMs + 200;
         }
