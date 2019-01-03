@@ -31,7 +31,7 @@ void TitleScreen::doAction(GameLoopControl& gameLoopControl, const GamePad& game
     if (gamePad.fire)
     {
         auto nextLevel = std::make_shared<Level1>();
-        gameLoopControl.switchToLevel(std::make_shared<LevelTransition>(nextLevel));
+        gameLoopControl.switchToLevel(std::make_shared<LevelTransition>(nextLevel, "Level 1"));
     }
 }
 
