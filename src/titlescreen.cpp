@@ -1,6 +1,7 @@
 #include "titlescreen.h"
 
 #include "level1.h"
+#include "level_transition.h"
 
 #include <cmath>
 
@@ -29,7 +30,8 @@ void TitleScreen::doAction(GameLoopControl& gameLoopControl, const GamePad& game
 {
     if (gamePad.fire)
     {
-        gameLoopControl.switchToLevel(std::make_shared<Level1>());
+        auto nextLevel = std::make_shared<Level1>();
+        gameLoopControl.switchToLevel(std::make_shared<LevelTransition>(nextLevel));
     }
 }
 

@@ -21,3 +21,4 @@ public:
     // called for each frame
     virtual void draw(SDL2pp::Renderer& renderer, uint64_t timeMs) = 0;
 };
+
