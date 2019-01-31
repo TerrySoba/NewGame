@@ -27,6 +27,7 @@ private:
     uint64_t m_nextBulletTime = 0;
 
     std::shared_ptr<SimpleActor> m_ship;
+    std::shared_ptr<SimpleActor> m_obstacle;
 
     ActorArena m_arena;
 };

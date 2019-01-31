@@ -24,7 +24,8 @@ void BulletActor::doAction(const GamePad& /*gamePad*/, uint64_t /*timeMs*/)
 
 void BulletActor::collision(std::set<ActorPtr> /*otherActors*/)
 {
-
+    this->setActive(false);
+    setPos({-100, -100});
 }
 
 bool BulletActor::isActive() const

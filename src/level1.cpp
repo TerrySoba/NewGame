@@ -13,7 +13,9 @@ void Level1::onEnter(GameLoopControl& gameLoopControl, SDL2pp::Renderer& rendere
 
     auto shipTexture = std::make_shared<SDL2pp::Texture>(renderer, gameLoopControl.getConfigValue("assetDir") + "/gfx/ship.png");
     m_ship = std::make_shared<SimpleActor>(shipTexture, SDL2pp::Point{100,220});
+    m_obstacle = std::make_shared<SimpleActor>(shipTexture, SDL2pp::Point{100,100});
 
+    m_arena.addActor(m_obstacle);
     m_arena.addActor(m_ship);
 
     auto bulletTexture = std::make_shared<SDL2pp::Texture>(renderer, gameLoopControl.getConfigValue("assetDir") + "/gfx/bullet.png");
@@ -107,6 +109,12 @@ void Level1::draw(SDL2pp::Renderer& renderer, uint64_t /*timeMs*/)
     {
         drawActor(renderer, *m_ship);
     }
+
+    if (m_obstacle)
+    {
+        drawActor(renderer, *m_obstacle);
+    }
+
 
     for (auto bullet : m_bullets)
     {

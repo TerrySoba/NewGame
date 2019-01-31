@@ -1,6 +1,7 @@
-FROM alpine:3.8
+FROM alpine:3.9
 
 RUN apk add --no-cache \
+	ninja \
 	cmake \
 	gcc \
 	g++ \
@@ -12,5 +13,3 @@ RUN apk add --no-cache \
 	sdl2_image-dev \
 	sdl2_mixer-dev \
 	sdl2_ttf-dev
-	
-
