@@ -47,7 +47,8 @@ RUN mkdir C:\\java && \
 	wget --no-check-certificate -c --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/otn-pub/java/jdk/8u192-b12/750e1c8617c5452694857ad95c3ee230/server-jre-8u192-windows-x64.tar.gz && \
 	cmake -E tar xzf server-jre-8u192-windows-x64.tar.gz
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/nanoserver:1809
+USER Administrator
 
 COPY --from=builder C:\\git C:\\git
 COPY --from=builder C:\\cmake C:\\cmake
